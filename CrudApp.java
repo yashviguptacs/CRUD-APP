@@ -8,10 +8,12 @@ System.out.println("CRUD sc USING JAVA");
 Scanner sc=new Scanner(System.in);
 while(true)
 {
-System.out.println("1.ADD");
-System.out.println("2.VIEW");
-System.out.println("3.DELETE");
-System.out.println("4.Update");
+System.out.println("1. ADD");
+System.out.println("2. UPDATE");
+System.out.println("3. DELETE");
+System.out.println("4. VIEW");
+System.out.println("5. VIEW ALL");
+System.out.println("0. EXIT");
 int ans=sc.nextInt();
 if(ans==1)
 {
@@ -69,6 +71,35 @@ System.out.print("Enter ID: ");
 int id= sc.nextInt();
 Utilities.delete(id);
 }
+
+if(ans==4)
+{
+System.out.print("Enter ID: ");
+int id= sc.nextInt();
+Student s=Utilities.getStudent(id);
+//System.out.println(s);
+if(s==null)
+{
+System.out.println("This id does'nt exist!!");
+continue;
+}
+System.out.println("ID: "+s.getId());
+System.out.println("Name: "+s.getName());
+System.out.println("Aadhar Number: "+s.getAadharNumber());
+System.out.println("Mobile Number: "+s.getMobileNumber());
+System.out.println("Is Indian: "+s.getIsIndian());
+
 }
 
-}}
+if(ans==5)
+{
+Utilities.viewAll();
+}
+
+if(ans==0) break;
+
+} //while loop here ending
+
+} //main here ends
+
+} //class ends here
