@@ -1,6 +1,88 @@
 import java.sql.*;
 public class Utilities
 {
+public static void viewAll()
+{
+try
+{
+Class.forName("com.mysql.cj.jdbc.Driver");
+Connection c;
+c=DriverManager.getConnection("jdbc:mysql://localhost:3306/db","yashvi","yashvi");
+
+Statement s;
+s=c.createStatement();
+ResultSet set=s.executeQuery("select * from student" );
+while(set.next())
+{
+int id=set.getInt(1);
+String name=set.getString(2);
+String aadharNumber=set.getString(3);
+String mobileNumber=set.getString(4);
+String isIndian=set.getString(5);
+
+System.out.println(id);
+System.out.println(name);
+System.out.println(aadharNumber);
+System.out.println(mobileNumber);
+System.out.println(isIndian);
+System.out.println("--------------------------------------------------------------------");
+}
+
+set.close();
+s.close();
+c.close();
+
+
+}catch(Exception e)
+{
+System.out.println(" ");
+
+}
+
+}
+
+
+
+public static Student getStudent(int id)
+{
+try
+{
+Class.forName("com.mysql.cj.jdbc.Driver");
+Connection c;
+c=DriverManager.getConnection("jdbc:mysql://localhost:3306/db","yashvi","yashvi");
+Student st=null;
+Statement s;
+s=c.createStatement();
+ResultSet set=s.executeQuery("select * from student where id="+id);
+while(set.next())
+{
+set.getInt(1);
+String name=set.getString(2);
+String aadharNumber=set.getString(3);
+String mobileNumber=set.getString(4);
+String isIndian=set.getString(5);
+st= new Student();
+st.setId(id);
+st.setName(name);
+st.setAadharNumber(aadharNumber);
+st.setMobileNumber(mobileNumber);
+st.setIsIndian(isIndian);
+}
+
+set.close();
+s.close();
+c.close();
+return st;
+
+}catch(Exception e)
+{
+System.out.println(id+ " This id does'nt exist!!!");
+return null;
+}
+
+}
+
+
 public static void delete(int id)
 {
 try
